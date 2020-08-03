@@ -8,12 +8,12 @@ services:
         build:
           context: ./
           dockerfile: csv2mysql.dockerfile
-          args:
-            db_host: db
-            db_port: 3306
-            db_name: mydb
-            db_user: admin
-            db_pass: admin
+            
+        environment:
+          MYSQL_ROOT_PASSWORD: superpass
+          MYSQL_DATABASE: mydb
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: admin
         ports:
           - "3306:3306"
           #- "443:443"
@@ -38,10 +38,22 @@ services:
     restart: always
     image: metabase/metabase:latest
     environment:
-        MYSQL_ROOT_PASSWORD: superpass
-        MYSQL_DATABASE: mydb
-        MYSQL_USER: admin
-        MYSQL_PASSWORD: admin
+        MB_DB_TYPE : mysql
+        MB_DB_DBNAME : metabase
+        MB_DB_PORT : 5432
+        MB_DB_USER : root
+        MB_DB_PASS : superpass
+        MB_DB_HOST : database
+        #https://github.com/metabase/metabase/blob/master/docs/operations-guide/running-metabase-on-docker.md
+        #https://medium.com/@martinahindura/how-to-setup-metabase-with-postgresql-and-docker-compose-bf4cc7e7f899
+        #https://github.com/Tinitto/compose-postgres-metabase
+        #https://www.metabase.com/docs/v0.36.2/getting-started.html
+
+
+        #MYSQL_ROOT_PASSWORD: superpass
+        #MYSQL_DATABASE: mydb
+        #MYSQL_USER: admin
+        #MYSQL_PASSWORD: admin
     #volumes:
         # - my-datavolume:/var/lib/mysql  
         # - './.data/mysql:/var/lib/mysql'
