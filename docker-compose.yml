@@ -39,8 +39,8 @@ services:
     image: metabase/metabase:latest
     environment:
         MB_DB_TYPE : mysql
-        MB_DB_DBNAME : metabase
-        MB_DB_PORT : 5432
+        MB_DB_DBNAME : mydb
+        MB_DB_PORT : 3306
         MB_DB_USER : root
         MB_DB_PASS : superpass
         MB_DB_HOST : database
